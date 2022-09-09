@@ -10,6 +10,7 @@ import SwiftUI
 struct WhiteButton: View {
 	let text: String
 	let imageName: String
+	var color: Color = .white
 	let action: () -> Void
 	
 	var body: some View {
@@ -22,8 +23,8 @@ struct WhiteButton: View {
 				Spacer()
 			}
 			.padding(.vertical, 6)
-			.background(.white)
-			.foregroundColor(.black)
+			.background(color)
+			.foregroundColor(color == .white ? .black : .white)
 		}
     }
 }
