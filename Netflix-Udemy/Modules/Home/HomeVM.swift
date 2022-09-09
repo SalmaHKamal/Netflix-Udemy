@@ -18,4 +18,8 @@ class HomeVM: ObservableObject {
 	init() {
 		movies = dataProvider.getMovies()
 	}
+	
+	func getItems(with type: ProductType) {
+		movies = dataProvider.getItems(with: type)
+	}
 }

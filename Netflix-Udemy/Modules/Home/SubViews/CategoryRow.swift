@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct CategoryRow: View {
-	let vm: HomeVM
+	@ObservedObject var vm: HomeVM
 	
 	var body: some View {
 		ForEach(vm.categories, id: \.self) { category in
