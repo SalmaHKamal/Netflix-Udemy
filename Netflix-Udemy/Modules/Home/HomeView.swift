@@ -10,18 +10,14 @@ import SwiftUI
 struct HomeView: View {
 	@ObservedObject var vm = HomeVM()
 	let screen = UIScreen.main.bounds
-	@State var currentItems = HomeTopListItem.allCases
 	@State var homeViewState: HomeViewState = .default
-	@State var selectedListItem: HomeTopListItem?
+	@State var selectedListItem: HomeTopListItem = .home
+	@State var selectedGenre: HomeGenreList = .all
 	@State var overlayItemsToShow: [String: Bool]?
-	var selectorItems: [String] {
-		guard let itemsDict = overlayItemsToShow else { return [] }
-		let items = itemsDict.values.compactMap({ $0 })
-		return items.map({ $0.description })
-	}
-	var selectorSelectedIndex: Int {
-		guard let selectedItem = overlayItemsToShow?.first(where: { $0.value == true }) else { return 0 }
-		return selectorItems.firstIndex(of: selectedItem.key) ?? 0
+	@State var shouldShowHomeListItemsOverlay = false
+	@State var shouldShowGenresOverlay = false
+	var selectedTopListItemIndex: Int {
+		return vm.homeListItems.firstIndex(of: selectedListItem) ?? 0
 	}
 	
     var body: some View {
@@ -35,18 +31,33 @@ struct HomeView: View {
 						.frame(width: screen.width, height: 500)
 						.padding(.top, -50)
 					HomeHeaderList(vm: vm,
-								   currentItems: $currentItems,
 								   homeViewState: $homeViewState,
 								   selectedListItem: $selectedListItem,
-								   overlayItemsToShow: $overlayItemsToShow)
+								   shouldShowHomeListItemsOverlay: $shouldShowHomeListItemsOverlay,
+								   shouldShowGenresOverlay: $shouldShowGenresOverlay)
 				}
 				CategoryRow(vm: vm)
 			}
 		}
-		.sheet(isPresented: .constant(overlayItemsToShow != nil)) {
-			SelectorOverlay(options: selectorItems,
-							shouldShowOverlay: .constant(true),
-							selectedIndex: selectorSelectedIndex)
+		.fullScreenCover(isPresented: $shouldShowHomeListItemsOverlay) {
+			SelectorOverlay(options: vm.homeListItemsDisplayText,
+							shouldShowOverlay: $shouldShowHomeListItemsOverlay,
+							selectedIndex: selectedTopListItemIndex) { selectedItemIndex in
+				selectedListItem = vm.homeListItems[selectedItemIndex]
+				selectedGenre = .all
+				if selectedListItem == .home {
+					homeViewState = .default
+				}
+				vm.getItems(with: selectedListItem.productType, and: selectedGenre)
+			}
+		}
+		.fullScreenCover(isPresented: $shouldShowGenresOverlay) {
+			SelectorOverlay(options: vm.allGenresDisplayText,
+							shouldShowOverlay: $shouldShowGenresOverlay,
+							selectedIndex: 0) { selectedGenreIndex in
+				selectedGenre = vm.allGenres[selectedGenreIndex]
+				vm.getItems(with: selectedListItem.productType, and: selectedGenre)
+			}
 		}
     }
 }

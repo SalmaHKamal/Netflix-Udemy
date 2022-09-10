@@ -7,13 +7,21 @@
 
 import SwiftUI
 
+struct HomeTopListItemModel {
+	let displayName: String
+	let action: () -> Void
+}
+
 enum HomeTopListItem: CaseIterable {
+	case home
 	case shows
 	case movies
 	case myList
 	
 	var productType: ProductType {
 		switch self {
+		case .home:
+			return .all
 		case .shows:
 			return .shows
 		case .movies:
@@ -25,6 +33,8 @@ enum HomeTopListItem: CaseIterable {
 	
 	var displayText: String {
 		switch self {
+		case .home:
+			return "Home"
 		case .shows:
 			return "TV Shows"
 		case .movies:
@@ -32,6 +42,13 @@ enum HomeTopListItem: CaseIterable {
 		case .myList:
 			return "My List"
 		}
+	}
+	
+	var iconName: String? {
+		guard case .home = self else {
+			return nil
+		}
+		return "logo"
 	}
 }
 
@@ -42,59 +59,55 @@ enum HomeViewState {
 
 struct HomeHeaderList: View {
 	let vm: HomeVM
-	@Binding var currentItems: [HomeTopListItem]
 	@Binding var homeViewState: HomeViewState
-	@Binding var selectedListItem: HomeTopListItem?
-	@Binding var overlayItemsToShow: [String: Bool]?
-	
+	@Binding var selectedListItem: HomeTopListItem
+	@Binding var shouldShowHomeListItemsOverlay: Bool
+	@Binding var shouldShowGenresOverlay: Bool
+	var defaultListItems: [HomeTopListItem] {
+		let result = vm.homeListItems.filter({ $0 != .home })
+		return result
+	}
+
 	var body: some View {
 		HStack(spacing: homeViewState == .default ? 0 : 16) {
 			Button {
-				overlayItemsToShow = nil
-				selectedListItem = nil
+				selectedListItem = .home
 				homeViewState = .default
 				vm.getItems(with: .all)
 			} label: {
-				Image("logo")
+				Image(HomeTopListItem.home.iconName!)
 					.resizable()
 					.scaledToFit()
 					.frame(width: 50)
 			}
-
-			// default screen state with all list items
+			
 			if homeViewState == .default {
 				Spacer()
-				ForEach(currentItems, id: \.self) { item in
+				
+				ForEach(defaultListItems, id: \.self) { item in
 					Button {
-						overlayItemsToShow = nil
 						selectedListItem = item
 						homeViewState = .edit
 						vm.getItems(with: item.productType)
 					} label: {
 						Text(item.displayText)
 					}
-					
 					Spacer()
 				}
-			// state for selected product type with genre dropdown
 			} else {
-			
+				
 				Button {
-					var items = ["Home": false]
-					_ = HomeTopListItem.allCases.map({ items.updateValue($0 == selectedListItem,
-																		 forKey: $0.displayText) })
-					overlayItemsToShow = items
-					
+					shouldShowHomeListItemsOverlay = true
 				} label: {
-					Text(selectedListItem?.displayText ?? "")
+					Text(selectedListItem.displayText)
 						.font(.system(size: 20))
 					Image(systemName: "arrowtriangle.down.fill")
 						.foregroundColor(.white)
 						.font(.system(size: 10))
 				}
-				
+
 				Button {
-					// show overlay
+					shouldShowGenresOverlay = true
 				} label: {
 					Text("All Genre")
 					Image(systemName: "arrowtriangle.down.fill")

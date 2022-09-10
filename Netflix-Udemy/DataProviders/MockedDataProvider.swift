@@ -8,24 +8,56 @@
 import Foundation
 
 struct MockedDataProvider: DataProviderProtocol {
-	let items = ["Action": [movie1, movie2],
-				 "Romantic": [movie2, movie3, movie1],
-				 "Horror": [movie3, movie1, movie2, movie3]]
+	let items = [movie1, movie2, movie3, series1]
 	
 	func getMovies() -> [String: [Movie]] {
-		return items
+		var result = [String: [Movie]]()
+		items.forEach({ item in
+			if var movies = result[item.genre.rawValue] {
+				movies.append(item)
+				result.updateValue(movies, forKey: item.genre.rawValue)
+			} else {
+				let movies = [item]
+				result.updateValue(movies, forKey: item.genre.rawValue)
+			}
+		})
+		return result
 	}
 	
-	func getItems(with type: ProductType) -> [String: [Movie]] {
+	func getItems(with type: ProductType, andGenre genre: HomeGenreList = .all) -> [String: [Movie]] {
 		switch type {
-		case .movie:
-			return ["Action": [movie1, movie2]]
+		case .movie, .shows:
+			return filter(forType: type, andGenre: genre)
+			
 		case .myList:
 			return [:]
-		case .shows:
-			return ["Standup-Comedy": [movie3]]
+			
 		case .all:
-			return items
+			return getMovies()
 		}
+	}
+}
+
+extension MockedDataProvider {
+	fileprivate func filter(forType type: ProductType, andGenre genre: HomeGenreList) -> [String: [Movie]] {
+		var result = [String: [Movie]]()
+		let shouldFilterGenre = genre != .all
+		
+		getMovies().forEach({
+			let filteredMovies = $1.filter({
+				let genrePredicate = shouldFilterGenre ? $0.genre.rawValue == genre.rawValue : true
+				guard case .movie = type else {
+					return ($0.episodes != nil) && (genrePredicate)
+				}
+				return ($0.episodes == nil) && (genrePredicate)
+			})
+			guard !filteredMovies.isEmpty else {
+				result.removeValue(forKey: $0)
+				return
+			}
+			result.updateValue(filteredMovies, forKey: $0)
+		})
+		
+		return result
 	}
 }
