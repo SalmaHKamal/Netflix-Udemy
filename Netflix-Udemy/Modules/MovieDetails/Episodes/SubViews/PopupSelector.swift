@@ -26,9 +26,6 @@ struct PopupSelector: View {
 		.fullScreenCover(isPresented: $shouldShowOverlay) {
 			SelectorOverlay(options: optionsList, shouldShowOverlay: $shouldShowOverlay)
 		}
-//		.sheet(isPresented: $shouldShowOverlay) {
-//			SelectorOverlay(options: optionsList, shouldShowOverlay: $shouldShowOverlay)
-//		}
     }
 }
 
@@ -36,39 +33,46 @@ struct SelectorOverlay: View {
 	let options: [String]
 	@Binding var shouldShowOverlay: Bool
 	@State var selectedIndex = 0
+	var completion: ((_ selectedIndex: Int) -> Void)? = nil
 	
 	var body: some View {
 		ZStack {
 			Color.black
 				.opacity(0.9)
+				.ignoresSafeArea(.all)
 			
+			Spacer()
 			VStack {
 				// options list
-				Spacer()
-				ForEach(Array(options.enumerated()), id: \.offset) { index, option in
-					Button {
-						selectedIndex = index
-					} label: {
-						Text(option)
-							.font(index == selectedIndex ? .largeTitle : .title)
-							.padding(.bottom, 40)
-							.foregroundColor(index == selectedIndex ? .white : .gray)
+
+				ScrollView {
+					
+					ForEach(Array(options.enumerated()), id: \.offset) { index, option in
+						Button {
+							selectedIndex = index
+						} label: {
+							Text(option)
+								.font(index == selectedIndex ? .largeTitle : .title)
+								.padding(.bottom, 40)
+								.foregroundColor(index == selectedIndex ? .white : .gray)
+						}
 					}
 				}
 				
 				// close button
 				Spacer()
 				Button {
+					completion?(selectedIndex)
 					shouldShowOverlay = false
 				} label: {
 					Image(systemName: "multiply.circle.fill")
-						.font(.system(size: 70))
+						.font(.system(size: 50))
 				}
 				.padding(.bottom, 20)
 			}
+		
 		}
 		.foregroundColor(.white)
-		.ignoresSafeArea(.all)
 		
 	}
 }

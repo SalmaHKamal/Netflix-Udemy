@@ -9,4 +9,5 @@ import Foundation
 
 protocol DataProviderProtocol {
 	func getMovies() -> [String: [Movie]]
+	func getItems(with type: ProductType, andGenre genre: HomeGenreList) -> [String: [Movie]]
 }
