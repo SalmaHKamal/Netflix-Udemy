@@ -33,6 +33,12 @@
 		80B4320228A81A2700209FEB /* EpisodesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B4320128A81A2700209FEB /* EpisodesView.swift */; };
 		80B4320528A81FC400209FEB /* PopupSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B4320428A81FC400209FEB /* PopupSelector.swift */; };
 		80C9DC8128CCAE620076BCF7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C9DC8028CCAE620076BCF7 /* MainView.swift */; };
+		80C9DC8428CCDE390076BCF7 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C9DC8328CCDE390076BCF7 /* SearchBar.swift */; };
+		80C9DC8628CCDE540076BCF7 /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C9DC8528CCDE540076BCF7 /* SearchVM.swift */; };
+		80D42AD928E9DBC4007E9953 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D42AD828E9DBC4007E9953 /* SearchView.swift */; };
+		80D42ADD28E9E318007E9953 /* TextFieldWithCustomPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D42ADC28E9E318007E9953 /* TextFieldWithCustomPrompt.swift */; };
+		80D42AE028EA06AF007E9953 /* TopSearches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D42ADF28EA06AF007E9953 /* TopSearches.swift */; };
+		80DF07B128EB40A700CF2ECC /* NoSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DF07B028EB40A700CF2ECC /* NoSearchResultView.swift */; };
 		80E127AD288C2A0A0003EC62 /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E127AC288C2A0A0003EC62 /* MovieDetailsView.swift */; };
 		80E127AF288C2C6C0003EC62 /* FixedTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E127AE288C2C6C0003EC62 /* FixedTopBar.swift */; };
 		80E127B2288C2CAF0003EC62 /* MovieDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E127B1288C2CAF0003EC62 /* MovieDetailsHeaderView.swift */; };
@@ -69,6 +75,12 @@
 		80B4320128A81A2700209FEB /* EpisodesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesView.swift; sourceTree = "<group>"; };
 		80B4320428A81FC400209FEB /* PopupSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupSelector.swift; sourceTree = "<group>"; };
 		80C9DC8028CCAE620076BCF7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		80C9DC8328CCDE390076BCF7 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		80C9DC8528CCDE540076BCF7 /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
+		80D42AD828E9DBC4007E9953 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		80D42ADC28E9E318007E9953 /* TextFieldWithCustomPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithCustomPrompt.swift; sourceTree = "<group>"; };
+		80D42ADF28EA06AF007E9953 /* TopSearches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSearches.swift; sourceTree = "<group>"; };
+		80DF07B028EB40A700CF2ECC /* NoSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSearchResultView.swift; sourceTree = "<group>"; };
 		80E127AC288C2A0A0003EC62 /* MovieDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsView.swift; sourceTree = "<group>"; };
 		80E127AE288C2C6C0003EC62 /* FixedTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTopBar.swift; sourceTree = "<group>"; };
 		80E127B1288C2CAF0003EC62 /* MovieDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsHeaderView.swift; sourceTree = "<group>"; };
@@ -150,6 +162,7 @@
 		8063D0832880255D0042A23F /* Netflix-Udemy */ = {
 			isa = PBXGroup;
 			children = (
+				80D42ADA28E9E2F5007E9953 /* Components */,
 				801AD38F2893FA62009A653E /* Extensions */,
 				80E127AA288C29C70003EC62 /* Modules */,
 				8063D09F288028A90042A23F /* DataProviders */,
@@ -236,9 +249,46 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		80C9DC8228CCDE290076BCF7 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				80D42ADE28EA069B007E9953 /* CustomViews */,
+				80C9DC8328CCDE390076BCF7 /* SearchBar.swift */,
+				80C9DC8528CCDE540076BCF7 /* SearchVM.swift */,
+				80D42AD828E9DBC4007E9953 /* SearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		80D42ADA28E9E2F5007E9953 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				80D42ADB28E9E2FE007E9953 /* CustomTextField */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		80D42ADB28E9E2FE007E9953 /* CustomTextField */ = {
+			isa = PBXGroup;
+			children = (
+				80D42ADC28E9E318007E9953 /* TextFieldWithCustomPrompt.swift */,
+			);
+			path = CustomTextField;
+			sourceTree = "<group>";
+		};
+		80D42ADE28EA069B007E9953 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				80D42ADF28EA06AF007E9953 /* TopSearches.swift */,
+				80DF07B028EB40A700CF2ECC /* NoSearchResultView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		80E127AA288C29C70003EC62 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				80C9DC8228CCDE290076BCF7 /* Search */,
 				80C9DC7F28CCAE540076BCF7 /* Main */,
 				80E127AB288C29F20003EC62 /* MovieDetails */,
 				8063D0942880265F0042A23F /* Home */,
@@ -401,13 +451,18 @@
 				801AD3A22895125E009A653E /* VideoView.swift in Sources */,
 				801AD39B28940A71009A653E /* MoreLikeThisView.swift in Sources */,
 				8063D09C288027CD0042A23F /* HomeVM.swift in Sources */,
+				80DF07B128EB40A700CF2ECC /* NoSearchResultView.swift in Sources */,
 				8063D0AA2881B3B70042A23F /* WhiteButton.swift in Sources */,
+				80D42AD928E9DBC4007E9953 /* SearchView.swift in Sources */,
+				80C9DC8628CCDE540076BCF7 /* SearchVM.swift in Sources */,
 				801AD3912893FA99009A653E /* StringExtension.swift in Sources */,
+				80D42AE028EA06AF007E9953 /* TopSearches.swift in Sources */,
 				80E127AF288C2C6C0003EC62 /* FixedTopBar.swift in Sources */,
 				80B4320528A81FC400209FEB /* PopupSelector.swift in Sources */,
 				80B4320228A81A2700209FEB /* EpisodesView.swift in Sources */,
 				8063D0A428803BB80042A23F /* CategoryRow.swift in Sources */,
 				80E127B2288C2CAF0003EC62 /* MovieDetailsHeaderView.swift in Sources */,
+				80D42ADD28E9E318007E9953 /* TextFieldWithCustomPrompt.swift in Sources */,
 				80E127AD288C2A0A0003EC62 /* MovieDetailsView.swift in Sources */,
 				8063D0A82881B1E10042A23F /* VerticalButton.swift in Sources */,
 				8063D0A62881AFB60042A23F /* HomeHeaderView.swift in Sources */,
@@ -416,6 +471,7 @@
 				8063D0852880255D0042A23F /* Netflix_UdemyApp.swift in Sources */,
 				8063D0A1288028CF0042A23F /* MockedDataProvider.swift in Sources */,
 				8063D09E288028850042A23F /* DataProviderProtocol.swift in Sources */,
+				80C9DC8428CCDE390076BCF7 /* SearchBar.swift in Sources */,
 				801AD3932893FE18009A653E /* MovieDescription.swift in Sources */,
 				8063D0972880267D0042A23F /* Movie.swift in Sources */,
 				807D278628CB86E000DC5DA4 /* EpisodeCard.swift in Sources */,

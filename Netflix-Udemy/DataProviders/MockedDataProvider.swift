@@ -36,6 +36,10 @@ struct MockedDataProvider: DataProviderProtocol {
 			return getMovies()
 		}
 	}
+	
+	func search(withText text: String) -> [Movie] {
+		return items.filter { $0.title.contains(text) }
+	}
 }
 
 extension MockedDataProvider {
