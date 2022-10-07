@@ -11,25 +11,6 @@ import Kingfisher
 struct MoreLikeThisView: View {
 	let movies: [Movie]
 	
-//	let data = (1...100).map { "Item \($0)" }
-//
-//	let columns = [
-//			GridItem(.adaptive(minimum: 80))
-//		]
-//
-//		var body: some View {
-//			ScrollView {
-//				LazyVGrid(columns: columns, spacing: 20) {
-//					ForEach(data, id: \.self) { item in
-//						Text(item)
-//					}
-//				}
-//				.padding(.horizontal)
-//			}
-//			.frame(maxHeight: 300)
-//			.foregroundColor(.white)
-//		}
-	
 	let screen = UIScreen.main.bounds
 	var itemWidth: CGFloat {
 		screen.width / 3.15
