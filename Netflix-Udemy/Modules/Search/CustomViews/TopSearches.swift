@@ -11,15 +11,26 @@ import Kingfisher
 struct TopSearches: View {
 	let title: String
 	let shows: [Movie]
+	@State var showDetailsToShow: Movie? = nil
 	
     var body: some View {
 		LazyVStack(alignment: .leading) {
 			Text(title)
 				.font(.headline)
 			ForEach(shows) { show in
-				TopSearchesShowItem(item: show)
+				Button {
+					showDetailsToShow = show
+				} label: {
+					TopSearchesShowItem(item: show)
+				}
+
 			}
 		}
+		.fullScreenCover(isPresented: .constant(showDetailsToShow != nil), content: {
+			MovieDetailsView(movie: showDetailsToShow!) {
+				showDetailsToShow = nil
+			}
+		})
 		.foregroundColor(.white)
     }
 }
