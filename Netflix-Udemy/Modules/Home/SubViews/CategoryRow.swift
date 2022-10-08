@@ -10,6 +10,7 @@ import Kingfisher
 
 struct CategoryRow: View {
 	@ObservedObject var vm: HomeVM
+	@Binding var movieDetailToShow: Movie?
 	
 	var body: some View {
 		ForEach(vm.categories, id: \.self) { category in
@@ -21,11 +22,15 @@ struct CategoryRow: View {
 				ScrollView(.horizontal, showsIndicators: false) {
 					LazyHStack(spacing: 16) {
 						ForEach(vm.movies[category]!) { movie in
-							KFImage.url(movie.thumbnailURL, cacheKey: nil)
-								.resizable()
-								.scaledToFill()
-								.frame(width: 150, height: 250)
-								.clipped()
+							Button {
+								movieDetailToShow = movie
+							} label: {
+								KFImage.url(movie.thumbnailURL, cacheKey: nil)
+									.resizable()
+									.scaledToFill()
+									.frame(width: 150, height: 250)
+									.clipped()
+							}
 						}
 					}
 				}

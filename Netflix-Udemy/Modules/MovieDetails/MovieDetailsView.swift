@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MovieDetailsView: View {
 	let movie: Movie
+	var closeBtnCompletion: (() -> Void)? = nil
 	
     var body: some View {
 		ZStack {
@@ -16,10 +17,10 @@ struct MovieDetailsView: View {
 				.ignoresSafeArea(.all)
 			
 			VStack {
-				FixedTopBar()
+				FixedTopBar(closeBtnCompletion: closeBtnCompletion)
+				MovieDetailsHeaderView(movie: movie)
 				
 				ScrollView(showsIndicators: false) {
-					MovieDetailsHeaderView(movie: movie)
 					MovieDescription()
 						.foregroundColor(.white)
 						.padding(.vertical, 10)

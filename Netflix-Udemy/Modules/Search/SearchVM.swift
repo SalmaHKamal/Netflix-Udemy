@@ -36,7 +36,7 @@ enum SearchViewState {
 				TopSearches(title: title!,
 								   shows: model)
 			} else {
-				MoreLikeThisView(movies: model)
+				GridView(movies: model)
 			}
 			
 		case .emptyView:

@@ -11,6 +11,7 @@ import Kingfisher
 struct HomeHeaderView: View {
 	// MARK: - Variables
 	let movie: Movie
+	@State var shouldShowHeaderInfo = false
 	
 	// MARK: - Helper Methods
 	func isLastMovieCategory(_ cat: String) -> Bool {
@@ -51,11 +52,14 @@ struct HomeHeaderView: View {
 					
 					Spacer()
 					VerticalButton(isOnImageName: "info.circle", isOffImageName: "info.circle", text: "info") {
-						//
+						shouldShowHeaderInfo = true
 					}
 					Spacer()
 				}
 			}
+			.fullScreenCover(isPresented: $shouldShowHeaderInfo, content: {
+				MovieDetailsView(movie: movie)
+			})
 			.foregroundColor(.white)
 			.background(LinearGradient(colors: [.black.opacity(0),
 												.black],

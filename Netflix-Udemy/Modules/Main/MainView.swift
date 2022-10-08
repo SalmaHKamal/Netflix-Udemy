@@ -46,7 +46,7 @@ enum MainTabViews: Int, CaseIterable {
 		case .home:
 			HomeView()
 		case .search:
-			Text("Search")
+			SearchView()
 		case .comingSoon:
 			Text("Coming Soon")
 		case .downloads:

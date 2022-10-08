@@ -19,6 +19,7 @@ struct HomeView: View {
 	var selectedTopListItemIndex: Int {
 		return vm.homeListItems.firstIndex(of: selectedListItem) ?? 0
 	}
+	@State var movieDetailToShow: Movie? = nil
 	
     var body: some View {
 		ZStack {
@@ -36,7 +37,7 @@ struct HomeView: View {
 								   shouldShowHomeListItemsOverlay: $shouldShowHomeListItemsOverlay,
 								   shouldShowGenresOverlay: $shouldShowGenresOverlay)
 				}
-				CategoryRow(vm: vm)
+				CategoryRow(vm: vm, movieDetailToShow: $movieDetailToShow)
 			}
 		}
 		.fullScreenCover(isPresented: $shouldShowHomeListItemsOverlay) {
@@ -57,6 +58,11 @@ struct HomeView: View {
 							selectedIndex: 0) { selectedGenreIndex in
 				selectedGenre = vm.allGenres[selectedGenreIndex]
 				vm.getItems(with: selectedListItem.productType, and: selectedGenre)
+			}
+		}
+		.fullScreenCover(isPresented: .constant(movieDetailToShow != nil)) {
+			MovieDetailsView(movie: movieDetailToShow!) {
+				movieDetailToShow = nil
 			}
 		}
     }
