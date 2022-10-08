@@ -11,7 +11,7 @@ import SwiftUI
 struct Netflix_UdemyApp: App {
     var body: some Scene {
         WindowGroup {
-			SearchView()
+			MainView()
         }
     }
 }
