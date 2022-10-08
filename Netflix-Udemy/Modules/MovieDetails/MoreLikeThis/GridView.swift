@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct MoreLikeThisView: View {
+struct GridView: View {
 	let movies: [Movie]
 	
 	let screen = UIScreen.main.bounds
@@ -21,18 +21,29 @@ struct MoreLikeThisView: View {
 		GridItem(.flexible()),
 		GridItem(.flexible())
 	]
+	@State var movieToShow: Movie? = nil
 	
     var body: some View {
 		ScrollView {
 			LazyVGrid(columns: columns) {
 				ForEach(movies, id: \.id) { movie in
-					KFImage(movie.thumbnailURL)
-						.resizable()
-						.scaledToFill()
-						.frame(width: itemWidth, height: 200)
-						.clipped()
+					Button {
+						movieToShow = movie
+					} label: {
+						KFImage(movie.thumbnailURL)
+							.resizable()
+							.scaledToFill()
+							.frame(width: itemWidth, height: 200)
+							.clipped()
+					}
+
 
 				}
+			}
+		}
+		.fullScreenCover(isPresented: .constant(movieToShow != nil)) {
+			MovieDetailsView(movie: movieToShow!) {
+				movieToShow = nil
 			}
 		}
     }
@@ -44,7 +55,7 @@ struct MoreLikeThisView_Previews: PreviewProvider {
 			Color.black
 				.ignoresSafeArea(.all)
 			
-			MoreLikeThisView(movies: [movie1, movie2, movie3, movie3, movie2, movie3])
+			GridView(movies: [movie1, movie2, movie3, movie3, movie2, movie3])
 		}
 		.previewInterfaceOrientation(.portraitUpsideDown)
     }

@@ -31,7 +31,7 @@ enum MovieDetailItem: CaseIterable {
 		case .trailers:
 			TrailersView(trailers: [trailer1, trailer2, trailer3])
 		case .moreLikeThat:
-			MoreLikeThisView(movies: [movie3, movie2, movie1])
+			GridView(movies: [movie3, movie2, movie1])
 		}
 	}
 }
