@@ -14,7 +14,12 @@ let movie1 = Movie(id: "1",
 				   categories: ["Action", "Drama", "Romance", "Thriller"],
 				   episodes: nil,
 				   genre: .action,
-				   numberOfSeasons: 0)
+				   numSeasonsLabel: "3 Seasons",
+				   castMembers: ["Salma"],
+				   creatorMembers: ["Salma"],
+				   description: "This is description",
+				   releaseYear: 2020,
+				   quality: "HD")
 
 let movie2 = Movie(id: "2",
 				   title: "Fast And Farious",
@@ -22,7 +27,12 @@ let movie2 = Movie(id: "2",
 				   categories: ["Action", "Drama", "Romance", "Thriller"],
 				   episodes: nil,
 				   genre: .horror,
-				   numberOfSeasons: 1)
+				   numSeasonsLabel: "3 Seasons",
+				   castMembers: ["Salma"],
+				   creatorMembers: ["Salma"],
+				   description: "This is description",
+				   releaseYear: 2020,
+				   quality: "HD")
 
 let movie3 = Movie(id: "3",
 				   title: "Fast And Farious",
@@ -30,7 +40,12 @@ let movie3 = Movie(id: "3",
 				   categories: ["Action", "Drama", "Romance", "Thriller"],
 				   episodes: nil,
 				   genre: .romance,
-				   numberOfSeasons: 2)
+				   numSeasonsLabel: "3 Seasons",
+				   castMembers: ["Salma"],
+				   creatorMembers: ["Salma"],
+				   description: "This is description",
+				   releaseYear: 2020,
+				   quality: "HD")
 
 let series1 = Movie(id: "4",
 				   title: "Fast And Farious",
@@ -43,7 +58,12 @@ let series1 = Movie(id: "4",
 									  videoUrl: URL(string: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjE3bSYg6D5AhVKwoUKHU7DABIQ3yx6BAgIEAI&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DcIJ8ma0kKtY&usg=AOvVaw3ebu3oUpNqkmupQU8EViG1")!,
 									  description: "Very interesting series")],
 				   genre: .romance,
-				   numberOfSeasons: 4)
+					numSeasonsLabel: "3 Seasons",
+					castMembers: ["Salma"],
+					creatorMembers: ["Salma"],
+					description: "This is description",
+					releaseYear: 2020,
+					quality: "HD")
 
 let trailer1 = Trailer(name: "Titanic",
 					   videoURL: URL(string: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjE3bSYg6D5AhVKwoUKHU7DABIQ3yx6BAgIEAI&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DcIJ8ma0kKtY&usg=AOvVaw3ebu3oUpNqkmupQU8EViG1")!,

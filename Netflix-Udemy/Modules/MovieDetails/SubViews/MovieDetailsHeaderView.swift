@@ -9,13 +9,13 @@ import SwiftUI
 import Kingfisher
 
 struct MovieDetailsHeaderView: View {
-	let movie: Movie
+	let movie: Movie?
 	let screenSize = UIScreen.main.bounds
 	let horizontalLabelPadding: CGFloat = 16
 	
     var body: some View {
 		VStack {
-			KFImage(movie.thumbnailURL)
+			KFImage(movie?.thumbnailURL)
 				.resizable()
 				.scaledToFill()
 				.frame(width: screenSize.width * 0.4 , height: 250)
@@ -27,7 +27,7 @@ struct MovieDetailsHeaderView: View {
 					
 				
 				// release year
-				Text("2020")
+				Text(movie?.releaseYearText ?? "")
 				
 				// type
 				ZStack {
@@ -39,14 +39,14 @@ struct MovieDetailsHeaderView: View {
 				}
 				
 				// seasons
-				Text("3 Seasons")
+				Text(movie?.numSeasonsLabel ?? "")
 				
 				// show type
 				ZStack {
 					RoundedRectangle(cornerRadius: 4)
 						.stroke(.gray, lineWidth: 3)
-						.frame(width: "HD".getTextWidth(withFont: UIFont.systemFont(ofSize: 14)) + horizontalLabelPadding , height: 30)
-					Text("HD")
+						.frame(width: (movie?.quality ?? "").getTextWidth(withFont: UIFont.systemFont(ofSize: 14)) + horizontalLabelPadding , height: 30)
+					Text(movie?.quality ?? "")
 				}
 			}
 			

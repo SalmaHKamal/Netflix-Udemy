@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct MovieDetailsView: View {
-	let movie: Movie
+	@State var movie: Movie?
 	var closeBtnCompletion: (() -> Void)? = nil
+	@ObservedObject var vm = MovieDetailsVM()
 	
     var body: some View {
 		ZStack {
@@ -21,13 +22,20 @@ struct MovieDetailsView: View {
 				MovieDetailsHeaderView(movie: movie)
 				
 				ScrollView(showsIndicators: false) {
-					MovieDescription()
+					MovieDescription(movie: movie)
 						.foregroundColor(.white)
 						.padding(.vertical, 10)
 					ItemsSelector()
 				}
 			}
 			.padding(.horizontal, 8)
+		}
+		.task {
+			do {
+				movie = try await vm.fetch()
+			} catch {
+				print(error.localizedDescription)
+			}
 		}
     }
 }

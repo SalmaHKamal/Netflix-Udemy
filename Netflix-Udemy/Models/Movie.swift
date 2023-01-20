@@ -40,7 +40,24 @@ struct Movie: Identifiable {
 	let categories: [String]
 	var episodes: [Episode]?
 	let genre: Genre
-	let numberOfSeasons: Int
+	let numSeasonsLabel: String
+	let castMembers: [String]
+	let creatorMembers: [String]
+	let description: String
+	let releaseYear: Int
+	let quality: String
+	
+	var castText: String {
+		"Cast: \(castMembers.joined(separator: ","))"
+	}
+	
+	var creatorText: String {
+		"Creators: \(creatorMembers.joined(separator: ","))"
+	}
+	
+	var releaseYearText: String {
+		"\(releaseYear)"
+	}
 }
 
 struct Episode: Identifiable {

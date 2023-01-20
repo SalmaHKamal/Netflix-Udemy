@@ -40,6 +40,10 @@ struct MockedDataProvider: DataProviderProtocol {
 	func search(withText text: String) -> [Movie] {
 		return items.filter { $0.title.contains(text) }
 	}
+	
+	func getDetails(for id: String) async throws -> Movie? {
+		return nil
+	}
 }
 
 extension MockedDataProvider {

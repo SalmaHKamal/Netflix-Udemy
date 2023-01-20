@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct MovieDescription: View {
+	let movie: Movie?
+	
     var body: some View {
 		VStack(alignment: .leading) {
-			Text("S2:E8 Endings and Beginnings")
+			Text(movie?.title ?? "")
 				.font(.headline)
-			Text("One day, Salma executes search warrant Salma executes search warrant Salma executes search warrant Salma executes search warrant.")
+			Text(movie?.description ?? "")
 				.padding(.vertical, 5)
-			Text("Cast: Salma, Hassan, Kamal")
+			Text(movie?.castText ?? "")
 				.font(.subheadline)
 				.foregroundColor(.gray)
-			Text("Creators: Nadra, Omar, Kareem")
+			Text(movie?.creatorText ?? "")
 				.font(.subheadline)
 				.foregroundColor(.gray)
 			
@@ -41,6 +43,6 @@ struct MovieDescription: View {
 
 struct MovieDescription_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDescription()
+		MovieDescription(movie: movie1)
     }
 }
