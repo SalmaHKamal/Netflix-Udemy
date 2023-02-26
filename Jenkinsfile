@@ -20,6 +20,12 @@ pipeline {
                 echo env.BUILD_TYPE
             }
         }
+        
+         stage('Test Push event') {
+            steps {
+                echo 'PUSH!!!'
+            }
+        }
     }
 }
 
