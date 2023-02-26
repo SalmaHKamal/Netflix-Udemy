@@ -16,7 +16,6 @@ pipeline {
             steps {
                 echo 'Selected Values are: \n'
                 echo params.buildType
-                echo params
                 echo 'environment variables are: \n'
                 echo env
             }
