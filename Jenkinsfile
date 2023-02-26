@@ -6,7 +6,7 @@ pipeline {
     
     parameters {
         // the default choice for commit-triggered builds is the first item in the choices list
-        choice(name: 'buildType', choices: ['Scan-only', 'Debug-firebaseDistribution', 'Release-AppStore-TestFlight'],
+        choice(name: 'buildType', choices: ['Scan_only', 'Debug_firebaseDistribution', 'Release_AppStore_Testflight'],
                description: 'The build types')
         booleanParam(name: 'Push_To_Remote', defaultValue: false, description: 'Toggle to push changes back to remote(check for repo permission on this)')
         }
