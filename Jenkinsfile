@@ -17,7 +17,7 @@ pipeline {
                 echo 'Selected Values are: \n'
                 echo params.buildType
                 echo 'environment variables are: \n'
-                echo env
+                echo env.BUILD_TYPE
             }
         }
     }
